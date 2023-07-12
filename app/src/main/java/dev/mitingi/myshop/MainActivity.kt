@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         productRvAdaptor= ProductRvAdaptor(emptyList())
-//        binding.rvProducts.adapter=ProductRvAdaptor
+        binding.rvProducts.adapter=productRvAdaptor
     }
 
     override fun onResume() {
@@ -39,9 +39,9 @@ var apiclient=ApiClient.buildClient(ApiInterface::class.java)
                 if (response.isSuccessful){
 
                     var products=response.body()?.products
-                    var ProductRvAdaptor=ProductRvAdaptor(products?: emptyList())
-                    binding.rvProducts.layoutManager=LinearLayoutManager(this@MainActivity)
-                    binding.rvProducts.adapter=ProductRvAdaptor
+                    var productRvAdaptor=ProductRvAdaptor(products?: emptyList())
+                    binding.rvProducts.layoutManager=GridLayoutManager(this@MainActivity,2)
+                    binding.rvProducts.adapter=productRvAdaptor
 
                     Toast.makeText(baseContext,"fetched ${products?.size} products",Toast.LENGTH_SHORT).show()
                 }
